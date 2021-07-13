@@ -1,5 +1,6 @@
 """A video player class."""
 
+from src import video_playlist
 from .video_library import VideoLibrary
 
 
@@ -8,6 +9,7 @@ class VideoPlayer:
 
     def __init__(self):
         self._video_library = VideoLibrary()
+        self.video_playing = None
 
     def number_of_videos(self):
         num_videos = len(self._video_library.get_all_videos())
@@ -38,7 +40,19 @@ class VideoPlayer:
         Args:
             video_id: The video_id to be played.
         """
-        print("play_video needs implementation")
+
+        # if the video doesn't exist, sidplay a warning message (and don't stop the current video)
+        if not self._video_library.get_video(video_id=video_id):
+            print("Cannot play video: Video does not exist")
+            return
+
+        # if a video is playing, display a note that this video will be stoppped (even if it is the same one)
+        if self.video_playing:
+            print("Stopping video:", self.video_playing.title)
+
+        # play a video by video_if
+        self.video_playing = self._video_library.get_video(video_id=video_id)
+        print("Playing video:", self.video_playing.title)
 
     def stop_video(self):
         """Stops the current video."""
