@@ -3,6 +3,6 @@
     "python.testing.nosetestsEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.testing.pytestArgs": [
-        "test"
-    ]
+    ],
+    "python.testing.pytestPath": "python -m pytest"
 }
